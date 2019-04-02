@@ -25,4 +25,4 @@ Every round of the game:
 
   -Only allow one click, then make other buttons (or all buttons) disabled      until other player selects something.
 
-  -Create a chat area
+  -Create a chat area that links with Firebase
