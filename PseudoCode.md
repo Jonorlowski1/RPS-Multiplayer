@@ -24,8 +24,5 @@ Every round of the game:
         -paper beats rock
 
   -Only allow one click, then make other buttons (or all buttons) disabled      until other player selects something.
-<<<<<<< HEAD:ReadMe.md
 
   -Create a chat area
-=======
->>>>>>> f2a36dbd0f1f10d3227b6ffe855fb76eeaf8ee7b:PseudoCode.md
