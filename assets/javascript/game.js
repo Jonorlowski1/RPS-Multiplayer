@@ -11,32 +11,3 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-var username = '';
-var playerOneChoice = '';
-var playerTwoChoice = '';
-
-// USERNAME submission
-$('#submit').on('click', function(event) {
-  event.preventDefault();
-  username = $('#username').val().trim();
-  console.log(username);
-  
-  database.ref().set({
-    username: username
-  });
-});
-
-$('.btn-choice').on('click', function () {
-  // event.preventDefault();
-  // $(this).val()
-
-  // username = $('#username').val().trim();
-  playerOneChoice = $(this).val();
-  playerTwoChoice = $(this).val();
-  
-  database.ref().set({
-    playerOneChoice: playerOneChoice,
-    playerTwoChoice: playerTwoChoice
-    // dateAdded: firebase.database.ServerValue.TIMESTAMP
-  });
-});
