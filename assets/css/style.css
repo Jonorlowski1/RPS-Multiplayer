@@ -1,0 +1,20 @@
+.jumbotron {
+  text-align: center;
+  background-color: darkgreen;
+  color: white;
+  border: 1px solid white;
+}
+
+body {
+  background-color: rgb(124, 57, 25)
+}
+
+.card-header {
+  background-color: rgb(226, 79, 79);
+  color: white;
+}
+
+.card {
+  border: 1px solid white;
+  margin: 5% auto;
+}

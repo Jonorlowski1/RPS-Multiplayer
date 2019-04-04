@@ -1,28 +1,25 @@
-Give each user a place to store a Username
+Jumbotron for the heading
 
-Display each player's Username, button choice, and wins/losses
-  -Wins/losses should either be just that, OR username + wins and + losses
-  -How do I differentiate between who clicked what button and how to log a      win/loss??
+Two containers, one a table and one a form with submit button
 
-Make three buttons: Rock, Paper, Scissors.
+Sync with Firebase to make sure mulitple users can access the same data across devices.
+  Firebase needs:
+    var trainName
+    var destination
+    var frequency
+    var nextArrival
+    var minutesAway
 
-Give each button a value R, P, S.
+When user enters in the "First Train Time", set to only take military time
+  Military time needs to be converted to standard time when it displays
 
-Link data to Firebase storage
+  Use Moment.js to take the first train time, multiply the frequency, and alert the user of the next arrival with .moment() for the current moment in time.
 
-Every round of the game:
-  -$(this) button value wins or loses against other user button click
-    -Match two arrays?
-      -If arr1 is empty, store first click there
-       Else store in arr2
-        -If arr1 and arr2 have content in them, run gameOver function 
-      -gameOver function:
-        -compare the two arrays
-        -user1 gets arr1, user2 gets arr2
-        -rock beats scissors
-        -scissors beats paper
-        -paper beats rock
+Needs to recalculate every time the page is refreshed
+  BONUS: recalculate every minute with an interval timer
 
-  -Only allow one click, then make other buttons (or all buttons) disabled      until other player selects something.
+Dynamically, through jQuery, append table contents when "submit" button is clicked
 
-  -Create a chat area that links with Firebase
+Clear form fields on "submit" click
+
+<!-- ***GET THE INFORMATION TO DISPLAY BEFORE DOING THE MOMENT.JS AND MATH*** -->
