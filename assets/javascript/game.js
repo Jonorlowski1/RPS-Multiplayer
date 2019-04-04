@@ -19,8 +19,15 @@ $('.btn').on('click', function (event){
 
   trainName = $('#trainNameInput').val().trim();
   destination = $('#destinationInput').val().trim();
-  firstTrainTime = $('#trainTimeInput').val().trim();
-  frequencyMin = $('#frequencyInput').val().trim();
+  firstTrainTime = moment(
+    $("#trainTimeInput")
+      .val()
+      .trim(),
+    "HH:mm"
+  )
+    .subtract(1, "years")
+    .format("X");  
+    frequencyMin = $('#frequencyInput').val().trim();
 
   // console.log('Train Name: ' + trainName);
   // console.log('Destination: ' + destination);
@@ -33,23 +40,34 @@ $('.btn').on('click', function (event){
     firstTrainTime: firstTrainTime,
     frequencyMin: frequencyMin
   });
+});
 
-  var timeConverted = moment(firstTrainTime, 'HH:mm').subtract(1, 'years');
-  console.log('Time Converted: ' + timeConverted);
-
+  
   database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
+    
+    var newRow = $('<tr>');
+    var newTrainName = $('<td>');
+    var newDestination = $('<td>');
+    var newFrequencyTd = $('<td>');
+    var newArrivalTd = $('<td>');
+    var newMinAway = $('<td>');
+    
+    console.log('Time Converted: ' + firstTrainTime);
 
-  var newRow = $('<tr>');
-  var newTrainName = $('<td>');
-  var newDestination = $('<td>');
-  var newFrequency = $('<td>');
-  var newArrival = $('<td>');
-  var newMinAway = $('<td>');
+    var newFrequency = snapshot.val().frequencyMin;
+    var newArrival = snapshot.val().firstTrainTime;
+  
+    var remainder = moment().diff(moment.unix(newArrival), 'minutes') % newFrequency;
+    var minutes = newFrequency - remainder;
+    var arrival = moment().add(minutes, 'm').format('hh:mm A');
+
 
   newTrainName.text(snapshot.val().trainName)
   newDestination.text(snapshot.val().destination)
-  newFrequency.text(snapshot.val().frequencyMin)
-  // newArrival.text(snapshot.val().firstTrainTime)
+  newFrequencyTd.text(newFrequency);
+  newArrivalTd.text(arrival);
+  newMinAway.text(minutes);
+
   // newMinAway.text(snapshot.val().)
 
   $('#tableBody').append(newRow);
@@ -57,8 +75,27 @@ $('.btn').on('click', function (event){
   newRow
     .append(newTrainName)
     .append(newDestination)
-    .append(newFrequency)
-    .append(newArrival)
+    .append(newFrequencyTd)
+    .append(newArrivalTd)
     .append(newMinAway)
   });
-});
+
+  // database.ref().on('child_added', function (snapshot) {
+  //   var tName = snapshot.val().name;
+  //   var tDestination = snapshot.val().destination;
+  //   var tFirstTrain = snapshot.val().firstTrainTime;
+  //   var tFrequency = snapshot.val().frequencyMin;
+
+  //   var remainder = moment().diff(moment.unix(tFirstTrain), 'minutes') % tFrequency;
+  //   var arrival = moment().add(minutes, 'm').format('hh:mm A')
+  //   var minutes = tFrequency - remainder;
+
+  //   $(".table > #tableBody").append(`<tr>
+  //         <td>${tName}</td>
+  //         <td>${tDestination}</td>
+  //         <td>${tFrequency}</td>
+  //         <td>${arrival}</td>
+  //         <td>${minutes}</td>
+  //         </tr>
+  //       `);
+  // });
